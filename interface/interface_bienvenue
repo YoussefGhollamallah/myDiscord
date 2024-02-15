@@ -1,0 +1,42 @@
+from interface_inscription import InterfaceInscription
+import tkinter as tk 
+
+class InterfaceBienvenue(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.minsize(800,600)
+        self.config(background="#211951")
+
+        self.title("Bienvenue!")
+
+        self.label_bienvenue = tk.Label(self, text="My Discord !")
+        self.label_bienvenue.pack(pady=20)
+
+        self.bouton_inscription = tk.Button(self, text="Inscription", command=self.ouvrir_inscription)
+        self.bouton_inscription.place(x=300,y=300)
+
+        self.bouton_connexion = tk.Button(self, text="Connexion", command=self.ouvrir_connexion)
+        self.bouton_connexion.place(x=450,y=300)
+
+    def ouvrir_inscription(self):
+        self.destroy()
+        
+        inscriptionApp = tk.Tk()
+        inscriptionApp.geometry("800x600")
+        inscriptionApp.title("Application d'Inscription")
+        inscriptionApp.config(bg="#211951")
+
+        bouton_interface_inscription = tk.Button(inscriptionApp, text="Ouvrir l'interface d'inscription", command=lambda: InterfaceInscription(inscriptionApp))
+        bouton_interface_inscription.pack(pady=20)
+
+
+        inscriptionApp.mainloop()
+
+        
+    def ouvrir_connexion(self):
+        # Ici, vous pouvez implémenter le code pour ouvrir l'écran de connexion
+        print("Ouvrir l'écran de connexion")
+
+
+app = InterfaceBienvenue()
+app.mainloop()
