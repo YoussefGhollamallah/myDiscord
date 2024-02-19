@@ -101,4 +101,3 @@ db_config = {
 
 db = Database(**db_config)
 user = Users(db)
-user.connexion("justine.bastien@laplateforme.io", "test")
