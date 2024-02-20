@@ -30,7 +30,7 @@ class Create_message(Message):
 
     def creer_message(self, message, id_user):
         # Créer un nouveau message dans la base de données
-        requete = "INSERT INTO messages (message, id_user) VALUES (%s, %s)"
+        requete = "INSERT message INTO messages (message, id_user) VALUES (%s, %s)"
         donnees = (message, id_user)
         self.curseur.execute(requete, donnees)
         self.connexion.commit()
