@@ -23,9 +23,9 @@ entreeNom = customtkinter.CTkEntry(frame,placeholder_text="Votre nom" ).place(x=
 labelPrenom = customtkinter.CTkLabel(frame, text="Prénom",font=(None,16), fg_color="transparent").place(x= 400, y = 175)
 entreePrenom = customtkinter.CTkEntry(frame,placeholder_text="Votre Prenom" ).place(x=400, y= 210)
 labelEmail = customtkinter.CTkLabel(frame, text="Email",font=(None,16), fg_color="transparent").place(x= 400, y = 275)
-entreeEmail = customtkinter.CTkEntry(frame,placeholder_text="Votre email" ).place(x=400, y= 305)
+entreeEmail = customtkinter.CTkEntry(frame,placeholder_text="Votre email" ).place(x=400, y= 310)
 labelPassword = customtkinter.CTkLabel(frame, text="Password",font=(None,16), fg_color="transparent").place(x= 400, y = 375)
-entreePassword = customtkinter.CTkEntry(frame,placeholder_text="Password" ).place(x=400, y= 405)
+entreePassword = customtkinter.CTkEntry(frame,placeholder_text="Password" ).place(x=400, y= 410)
 
 buttonInscription = customtkinter.CTkButton(frame, text="S'inscrire").place(x=400,y=450)
 
