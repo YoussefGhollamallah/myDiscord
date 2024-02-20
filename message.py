@@ -1,21 +1,22 @@
 import mysql.connector
+from datetime import datetime
 
 class Message():
-    def __init__(self, message, id_utilisateur):
+    def __init__(self, message, id_user):
         self.__message = message
-        self.__id_utilisateur = id_utilisateur
+        self.__id_user = id_user
 
     def obtenir_message(self):
         return self.__message
     
     def obtenir_id_utilisateur(self):
-        return self.__id_utilisateur
+        return self.__id_user
         
     def definir_message(self, message):
         self.__message = message
     
-    def definir_id_utilisateur(self, id_utilisateur):
-        self.__id_utilisateur = id_utilisateur
+    def definir_id_utilisateur(self, id_user):
+        self.__id_user = id_user
 
 class Create_message(Message):
     def __init__(self):
@@ -30,17 +31,21 @@ class Create_message(Message):
 
     def creer_message(self, message, id_user):
         # Créer un nouveau message dans la base de données
-        requete = "INSERT message INTO messages (message, id_user) VALUES (%s, %s)"
-        donnees = (message, id_user)
+        now = datetime.now()  # Obtenir l'heure actuelle
+        heure = now.strftime("%Y-%m-%d %H:%M:%S")  # Formatter l'heure
+        requete = "INSERT INTO message (message, id_users, heure) VALUES (%s, %s, %s)"
+        donnees = (message, id_user, heure)
         self.curseur.execute(requete, donnees)
         self.connexion.commit()
         print("Message créé avec succès.")
         
-        createur_message = Create_message()
-        createur_message.creer_message("Bonjour tout le monde!", 123) 
-        createur_message.fermer_connexion()
 
     def fermer_connexion(self):
         # Fermer la connexion à la base de données
         self.connexion.close()
         print("Connexion fermée.")
+
+createur_message = Create_message()
+# createur_message.creer_message("Bonjour tout le monde!", 1)
+createur_message.creer_message("ca va ?", 2)
+createur_message.fermer_connexion()
