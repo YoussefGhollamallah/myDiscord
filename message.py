@@ -32,9 +32,9 @@ class Create_message(Message):
     def creer_message(self, message, id_user):
         # Créer un nouveau message dans la base de données
         now = datetime.now()  # Obtenir l'heure actuelle
-        heure = now.strftime("%Y-%m-%d %H:%M:%S")  # Formatter l'heure
-        requete = "INSERT INTO message (message, id_users, heure) VALUES (%s, %s, %s)"
-        donnees = (message, id_user, heure)
+        horaire = now.strftime("%Y-%m-%d %H:%M:%S")  # Formatter l'heure
+        requete = "INSERT INTO messages (message, id_user, horaire) VALUES (%s, %s, %s)"
+        donnees = (message, id_user, horaire)
         self.curseur.execute(requete, donnees)
         self.connexion.commit()
         print("Message créé avec succès.")
@@ -47,5 +47,5 @@ class Create_message(Message):
 
 createur_message = Create_message()
 # createur_message.creer_message("Bonjour tout le monde!", 1)
-createur_message.creer_message("ca va ?", 2)
+createur_message.creer_message("ca va ?")
 createur_message.fermer_connexion()
