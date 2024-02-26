@@ -2,13 +2,13 @@ import mysql.connector
 from datetime import datetime
 
 class Show_message:
-    def __init__(self, message, horaire, id_user):
-        self.__message = message
+    def __init__(self, messages, horaire, id_user):
+        self.__messages = messages
         self.__horaire = horaire
         self.__id_user = id_user
     
-    def get_message(self):  # Modifier le nom de la méthode pour correspondre à l'attribut
-        return self.__message
+    def get_messages(self):
+        return self.__messages
     
     def get_heure(self):
         return self.__horaire
@@ -16,8 +16,8 @@ class Show_message:
     def get_id_user(self):
         return self.__id_user
     
-    def set_message(self, message):  # Modifier le nom de la méthode pour correspondre à l'attribut
-        self.__message = message
+    def set_messages(self, messages):
+        self.__messages = messages
     
     def set_heure(self,horaire):
         self.__horaire = horaire
@@ -34,10 +34,31 @@ class Select_message:
         self.curseur = self.connexion.cursor()
         
     def afficher_messages(self):
-        requete = "SELECT * FROM message WHERE id_user IN (1, 2) ORDER BY id_user"  # Requête modifiée
-        self.curseur.execute(requete)
-        resultats = self.curseur.fetchall()  # Récupération des résultats
-        for row in resultats:
-            # Création d'un objet Show_message pour chaque ligne de résultat
-            message = Show_message(row[0], row[1], row[2])
-            print("Message:", message.get_message())  # Utiliser la méthode correcte pour obtenir le message
+        try:
+            # Requête SQL pour sélectionner les messages avec id_user 1 et 2, triés par ordre croissant d'horaire
+            query = "SELECT * FROM messages WHERE (id_user = 1 OR id_user = 3) ORDER BY horaire ASC"
+            
+            # Exécution de la requête
+            self.curseur.execute(query)
+            
+            # Récupération des résultats
+            resultats = self.curseur.fetchall()
+            
+            # Affichage des résultats
+            for row in resultats:
+                messages = row[1]
+                horaire = row[2]
+                id_user = row[3]
+                print(f" Messages: {messages}, {horaire}, ID utilisateur: {id_user}")
+        
+        except mysql.connector.Error as err:
+            print("Erreur lors de l'exécution de la requête :", err)
+        
+        finally:
+            # Fermeture du curseur et de la connexion
+            self.curseur.close()
+            self.connexion.close()
+
+# Utilisation
+selecteur = Select_message()
+selecteur.afficher_messages()
