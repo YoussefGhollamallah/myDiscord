@@ -1,4 +1,12 @@
 import customtkinter
+import subprocess
+
+def open_profile_window():
+    subprocess.Popen(["python", "GUIprofil.py"])
+
+def open_message_window():
+    subprocess.Popen(["python", "GUImsg.py"])
+
 
 screenAcceuil = customtkinter.CTk()
 
@@ -15,11 +23,11 @@ frameProfil = customtkinter.CTkFrame(master=screenAcceuil, width=200, height=100
 inputChat = customtkinter.CTkEntry(framechat, placeholder_text="Entrée votre messages", width=710).place(x=250, y=635)
 
 # Bouton pour le profil
-buttonProfil = customtkinter.CTkButton(master=frameProfil, text="Profil")
+buttonProfil = customtkinter.CTkButton(master=frameProfil, text="Profil", command=open_profile_window)
 buttonProfil.place(x=30, y=20)
 
 # Bouton pour les messages
-buttonMessages = customtkinter.CTkButton(master=frameProfil, text="Messages")
+buttonMessages = customtkinter.CTkButton(master=frameProfil, text="Messages", command=open_message_window)
 buttonMessages.place(x=30, y=60)
 
 # Bouton vocal
