@@ -5,7 +5,7 @@ import emoji
 class ChatGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Chat avec Emojis")
+        self.root.title("Message")
         self.root.configure(background='#000000')  # Couleur de fond pour la fenêtre principale
 
         # Cadre pour afficher les messages
