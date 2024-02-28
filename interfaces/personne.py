@@ -2,6 +2,7 @@ from database import Database
 import mysql.connector
 from hashlib import sha512
 
+
 class Users:
     def __init__(self, db):
         self.db = db
@@ -29,7 +30,8 @@ class Users:
             # Fermeture de la connexion en cas d'erreur
             self.db.disconnect()
 
-    def inscription(self, nom, prenom, email, password):
+    def inscription(self, nom, prenom, email, password, visibility=0):
+        
         try:
             # Vérification de l'existence de l'email
             if self.email_exists(email):
@@ -57,7 +59,7 @@ class Users:
             # Fermeture de la connexion en cas d'erreur
             self.db.disconnect()
 
-    def connexion(self, email, password):
+    def connexion(self, email, password, visibility=1):
         try:
             self.db.connect()
 
@@ -96,7 +98,7 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': 'root',
-    'database': 'laplateforme'
+    'database': 'mydiscord'
 }
 
 db = Database(**db_config)
