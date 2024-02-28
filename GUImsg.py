@@ -27,7 +27,7 @@ class ChatGUI:
         self.send_button.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Boutons d'emojis
-        self.emojis = ["😊", "😂", "😍", "😎", "😜", "😡"]
+        self.emojis = ["😊", "😂", "❤️", "🖐️", "👍", "😡"]
         self.emoji_buttons = []
         for emoji_unicode in self.emojis:
             emoji_button = tk.Button(root, text=emoji_unicode, font=('Segoe UI Emoji', 12), command=lambda e=emoji_unicode: self.insert_emoji(e), bg='#FDFEDF')  # Couleur de fond pour les boutons emoji
@@ -45,7 +45,7 @@ class ChatGUI:
             self.msg_list.insert(tk.END, "Vous: \n") #remplacer vous par nom prenom
             self.msg_list.insert(tk.END, f"{message}\n", 'sent_message')
             self.msg_list.config(state=tk.DISABLED)
-            self.msg_list.tag_configure('sent_message', justify='right', foreground='white', background='#645552', font=('Arial', 10))  # Ajuster la taille de la police
+            self.msg_list.tag_configure('sent_message', justify='right', foreground='black', background='white', font=('Arial', 10))  # Ajuster la taille de la police
             self.msg_list.yview(tk.END)  
             self.entry_field.delete(0, tk.END)
 
