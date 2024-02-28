@@ -1,5 +1,4 @@
 import mysql.connector
-import tkinter
 
 class connection():
     def __init__(self):

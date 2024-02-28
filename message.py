@@ -56,8 +56,8 @@ class Create_message(Message):
         self.connexion.close()
         print("Connexion fermée.")
 
-# createur_message = Create_message()
-# createur_message.creer_message("Bonjour tout le monde!", 1)
-# createur_message.creer_message("ça va ?", 2)
-# createur_message.creer_message("salutation!", 3)
-# createur_message.fermer_connexion()
+createur_message = Create_message()
+createur_message.creer_message("Bonjour tout le monde!", 1)
+createur_message.creer_message("ça va ?", 2)
+createur_message.creer_message("salutation!", 3)
+createur_message.fermer_connexion()
