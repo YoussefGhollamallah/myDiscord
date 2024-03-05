@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Discord</title>
+</head>
+<body>
+    <p>{{ message }}</p>
+    {{if message == "Inscription réussie"}}
+        <a href="/connexion">connexion</a>
+    {{elif message == "Connexion réussi !"}}
+        <a href="/profil">profil</a>
+    {{else}}
+        <a href="/">retour</a>
+    {{endif}}
+    
+</body>
+</html>
