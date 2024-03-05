@@ -1,4 +1,4 @@
-from database import Database
+from classe.database import Database
 import mysql.connector
 from hashlib import sha512
 
