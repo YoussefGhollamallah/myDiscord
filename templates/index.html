@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>MyDiscord</title>
+</head>
+<body>
+    <main>
+        <img src="{{ url_for('static', filename='asset/logo.jpg') }}" alt="logo">
+        <h1>My Discord</h1>
+        <p>My Discord est un site de chat en ligne qui vous permet de discuter avec vos amis.</p>
+        <div>
+            <ul>
+                <li><a href="/connexion">Se connecter</a></li>
+                <li><a href="/inscription">S'inscrire</a></li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Discrod | inscription</title>
+</head>
+<body>
+    <header>
+        <h1>inscription</h1>
+    </header>
+    <main>
+        <form action="{{ url_form(traitement) }}" method="GET">
+            <input type="text" name="nom" placeholder="nom" required>
+            <input type="text" name="prénom" placeholder="prénom" required>
+            <input type="email" name="email" placeholder="email" required>
+            <input type="password" name="password" placeholder="password" required>
+            <input type="password" name="password_confirm" placeholder="confirm password" required>
+            <input type="submit" value="inscription">
+        </form>
+        <a href="/">retour</a>
+    </main>
+    
+</body>
+</html>
