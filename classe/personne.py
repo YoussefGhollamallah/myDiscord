@@ -1,6 +1,6 @@
 from classe.database import Database
 import mysql.connector
-from hashlib import sha512
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class Users:
@@ -30,7 +30,7 @@ class Users:
             # Fermeture de la connexion en cas d'erreur
             self.db.disconnect()
 
-    def inscription(self, nom, prenom, email, password, visibility=0):
+    def inscription(self, nom, prenom, email, password):
         
         try:
             # Vérification de l'existence de l'email
@@ -40,17 +40,14 @@ class Users:
 
             self.db.connect()
 
-            password = password.encode()
-            password_hash = sha512(password).hexdigest()
-
+            password_hash = generate_password_hash(password)
             # Insertion de l'utilisateur
             query = "INSERT INTO users (nom, prenom, email, password) VALUES (%s, %s, %s, %s)"
             data = (nom, prenom, email, password_hash)
 
             # Exécution de la requête
             self.db.executeQuery(query, data)
-
-            print("Inscription réussie")
+            
 
         except mysql.connector.Error as err:
             print(f"Erreur: {err}")
@@ -59,11 +56,38 @@ class Users:
             # Fermeture de la connexion en cas d'erreur
             self.db.disconnect()
 
-    def connexion(self, email, password, visibility=1):
+    def connexion(self, email, password):
         try:
             self.db.connect()
 
             # Vérification de l'existence de l'email dans la table users
+            query = "SELECT * FROM users WHERE email = %s"
+            data = (email, )
+
+            cursor = self.db.connection.cursor(dictionary=True)
+            cursor.execute(query, data)
+            result = cursor.fetchone()
+
+            if not result:
+                print("Erreur : Cet email n'existe pas.")
+                return None
+            
+            if not check_password_hash(result['password'], password):
+                print("Erreur : Le mot de passe est incorrect.")
+                return None
+
+            user_details = { k: v for k, v in result.items() if k != 'password' }
+            return user_details
+        
+        finally:
+            self.db.disconnect()
+
+
+    def get_user(self, email):
+        try:
+            self.db.connect()
+
+            # Récupération des informations de l'utilisateur
             query = "SELECT * FROM users WHERE email = %s"
             data = (email,)
 
@@ -71,27 +95,18 @@ class Users:
                 cursor.execute(query, data)
                 result = cursor.fetchall()
 
-            if len(result) == 0:
-                print("Erreur : Cet email n'existe pas.")
-                return
+            nom = result[0][1]
+            prenom = result[0][2]
+            email = result[0][3]
+            visibility = "connecté"
 
-            # Vérification du mot de passe
-            stored_password_hash = result[0][4]  # La colonne password est la cinquième (index 4)
-            input_password_hash = sha512(password.encode('utf-8')).hexdigest()
-
-
-            if stored_password_hash != input_password_hash:
-                print("Erreur : Mot de passe incorrect.")
-                return
-
-            print("Connexion réussie")
+            return nom, prenom, email, visibility
 
         except mysql.connector.Error as err:
-            print(f"Erreur lors de la connexion : {err}")
+            print(f"Erreur lors de la récupération des informations de l'utilisateur : {err}")
 
         finally:
             self.db.disconnect()
-
 
 # Exemple d'utilisation
 db_config = {

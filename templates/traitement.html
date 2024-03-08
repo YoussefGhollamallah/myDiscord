@@ -7,13 +7,7 @@
 </head>
 <body>
     <p>{{ message }}</p>
-    {{if message == "Inscription réussie"}}
-        <a href="/connexion">connexion</a>
-    {{elif message == "Connexion réussi !"}}
-        <a href="/profil">profil</a>
-    {{else}}
-        <a href="/">retour</a>
-    {{endif}}
+    <a href="/profil">afficher profil</a>
     
 </body>
 </html>

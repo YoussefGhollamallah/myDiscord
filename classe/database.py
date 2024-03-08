@@ -6,6 +6,7 @@ class Database:
         self.user = user
         self.password = password
         self.database = database
+        self.visibility = 0
 
     def connect(self):
         self.connection = mysql.connector.connect(

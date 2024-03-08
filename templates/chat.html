@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    <form id="chatForm">
+        <label for="message">Enter your message:</label>
+        <input type="text" id="message" name="message" required>
+        <input type="submit" value="Send">
+    </form>
+    <div id="messages"></div>
+
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {  // changed 'test' to 'connect'
+            socket.emit('joined', {});
+        });
+
+        socket.on('message', function(data) {
+            $('#messages').append('<p>' + data.username + ': ' + data.message + '</p>');
+        });
+
+        $('#chatForm').submit(function(e) {
+            e.preventDefault();
+            var message = $('#message').val();
+            socket.emit('message', message);
+            $('#message').val('');
+        });
+    </script>
+</body>
+</html>
