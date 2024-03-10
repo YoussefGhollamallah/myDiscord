@@ -1,1 +1,1 @@
-__all__ = ["database", "personne"]
+from classe.databse 
